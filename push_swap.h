@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:45:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/17 12:37:11 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/17 16:16:48 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void		print_stack(t_stack stack);
 void		enumerate_stack(t_stack *stack);
 void		free_stack(int i, t_stack stack);
 int			*copy_stack(t_stack *stack);
-void		calc_max_subseq(t_stack *stack);
+int			*calc_max_subseq(t_stack *stack);
 
 #endif
