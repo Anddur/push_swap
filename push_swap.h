@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:45:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 12:49:23 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/18 18:26:24 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "./libft/libft.h"
+
+# define MAX(x, y) ((x > y) ? x : y)
+# define MIN(x, y) ((x < y) ? x : y)
+# define ABS(x) ((x > 0) ? x : -x)
 
 typedef struct	s_stack
 {
@@ -52,5 +56,8 @@ void		pb(t_frame *frame, int v);
 void		rr(t_frame *frame, int v);
 void		rrr(t_frame *frame, int v);
 void		solve(t_frame *frame, int *subseq, int sub_len, int stack_len);
+void		divide_stack(t_frame *frame, int *subseq, int sub_len);
+void		merge_stack(t_frame *frame);
+int			find_min(int *arr, int len);
 
 #endif

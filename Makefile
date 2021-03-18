@@ -17,7 +17,9 @@ SRCS	=	push_swap.c \
 			operation_a.c \
 			operation_b.c \
 			operation_mix.c \
-			algorithm.c
+			algorithm.c \
+			divide_stack.c \
+			merge_stack.c
 
 OBJS	=	$(SRCS:.c=.o)
 

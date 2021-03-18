@@ -6,62 +6,59 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:40:04 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 13:19:27 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/18 18:33:26 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_last_val(t_frame *frame, int *subseq, int sub_len)
+int		find_min_pos(t_stack stack)
 {
-	int j;
-	int flag;
+	int min;
+	int i;
+	int pos;
 
-	while (1)
+	i = 0;
+	min = stack.cont[i][0];
+	pos = i;
+	while (i < stack.dim)
 	{
-		j = 0;
-		flag = 0;
-		while (j < sub_len)
+		if (min > stack.cont[i][0])
 		{
-			if (frame->a.cont[frame->a.dim - 1][0] == subseq[j])
-				flag = 1;
-			j++;
+			min = stack.cont[i][0];
+			pos = i;
 		}
-		if (!flag)
-		{
-			rra(&frame->a, 1);
-			pb(frame, 1);
-		}
-		else
-			break ;
+		i++;
 	}
+	return (pos);
 }
 
-void	divide_stack(t_frame *frame, int *subseq, int sub_len)
+void	stack_align(t_stack stack)
 {
-	int j;
-	int flag;
+	int tmp;
+	int min_pos;
+	int i;
 
-	check_last_val(frame, subseq, sub_len);
-	while (frame->a.dim != sub_len)
+	i = 0;
+	min_pos = find_min_pos(stack);
+	tmp = stack.dim - min_pos;
+	if (min_pos > tmp)
 	{
-		j = 0;
-		flag = 0;
-		while (j < sub_len)
-		{
-			if (frame->a.cont[0][0] == subseq[j])
-				flag = 1;
-			j++;
-		}
-		if (flag)
-			ra(&frame->a, 1);
-		else
-			pb(frame, 1);
+		while (i++ <= tmp)
+			rra(&stack, 1);
+	}
+	else
+	{
+		while (i++ < min_pos)
+			ra(&stack, 1);
 	}
 }
 
 void	solve(t_frame *frame, int *subseq, int sub_len, int stack_len)
 {
 	divide_stack(frame, subseq, sub_len);
+	while (frame->b.dim)
+		merge_stack(frame);
+	stack_align(frame->a);
 	stack_len = 0;
 }
