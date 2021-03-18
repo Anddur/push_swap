@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 12:40:04 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 18:33:26 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:05:03 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	stack_align(t_stack stack)
 	tmp = stack.dim - min_pos;
 	if (min_pos > tmp)
 	{
-		while (i++ <= tmp)
+		while (i++ < tmp)
 			rra(&stack, 1);
 	}
 	else

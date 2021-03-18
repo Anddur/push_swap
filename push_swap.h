@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:45:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 18:26:24 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:25:49 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			stack_pop(t_stack stack);
 void		fill_stack(char **argv, int argc, t_stack *stack);
 void		print_stack(t_frame frame);
 void		enumerate_stack(t_stack *stack);
-void		free_stack(int i, t_stack stack);
+void		free_stack(t_frame *frame);
 int			*copy_stack(t_stack *stack);
 int			*calc_max_subseq(t_stack *stack, int *sub_len);
 void		sa(t_stack *stack, int v);

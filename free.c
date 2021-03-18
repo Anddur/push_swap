@@ -6,16 +6,18 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 10:28:13 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/17 11:46:37 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:31:17 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "push_swap.h"
 
-void	free_stack(int i, t_stack stack)
+void	free_stack(t_frame *frame)
 {
-	// while (i >= 0)
-	// 	free(stack.cont[i--]);
+	int i;
+
 	i = 0;
-	free(stack.cont);
+	free(frame->a.cont);
+	i = 0;
+	free(frame->b.cont);
 }
