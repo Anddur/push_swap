@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 11:58:48 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/17 16:23:20 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:38:45 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memmove_int(void *dest, const void *src, size_t n)
 {
-	int		*tmp;
+	int			*tmp;
 	const int	*s;
 
 	if (!dest && !src)
@@ -53,7 +53,6 @@ int		find_min(int *arr, int len)
 	}
 	return (min);
 }
-
 
 void	rotate_arr(int *copy, int len_seq, int min)
 {
@@ -106,7 +105,7 @@ int		*max_subseq(int j, int *lis, int max_lis, int *copy)
 	int flag;
 	int *ret;
 
-	if (!(ret = malloc(sizeof(int) * max_lis)))
+	if (!(ret = malloc(sizeof(int) * max_lis + 1)))
 		return (NULL);
 	flag = 0;
 	while (--j >= 0)
@@ -121,7 +120,7 @@ int		*max_subseq(int j, int *lis, int max_lis, int *copy)
 	return (ret);
 }
 
-int		*calc_max_subseq(t_stack *stack)
+int		*calc_max_subseq(t_stack *stack, int *sub_len)
 {
 	int		*copy;
 	int		*lis;
@@ -130,6 +129,7 @@ int		*calc_max_subseq(t_stack *stack)
 	int		*ret;
 
 	j = 0;
+	max_lis = 0;
 	copy = copy_stack(stack);
 	take_min(copy, stack->dim);
 	lis = calc_lis(copy, stack->dim, &max_lis, &j);
@@ -137,5 +137,6 @@ int		*calc_max_subseq(t_stack *stack)
 		return (0);
 	ret = max_subseq(j, lis, max_lis, copy);
 	free(lis);
+	*sub_len = max_lis + 1;
 	return (ret);
 }

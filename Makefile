@@ -13,7 +13,11 @@ SRCS	=	push_swap.c \
 			stack.c \
 			free.c \
 			enumerate_stack.c \
-			max_subseq.c
+			max_subseq.c \
+			operation_a.c \
+			operation_b.c \
+			operation_mix.c \
+			algorithm.c
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   operation_mix.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/17 09:44:46 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 12:49:29 by aduregon         ###   ########.fr       */
+/*   Created: 2021/03/18 11:32:49 by aduregon          #+#    #+#             */
+/*   Updated: 2021/03/18 11:55:27 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		main(int argc, char **argv)
+void	rr(t_frame *frame, int v)
 {
-	t_frame	frame;
-	int		*subseq;
-	int		sub_len = 0;
+	if (frame->a.dim > 1)
+		ra(&frame->a, 0);
+	if (frame->b.dim > 1)
+		rb(&frame->b, 0);
+	if (v)
+		write(1, "rr\n", 3);
+}
 
-	if (argc < 2)
-		exit(0);
-	frame = create_frame(argc);
-	fill_stack(argv, argc, &frame.a);
-	enumerate_stack(&frame.a);
-	subseq = calc_max_subseq(&frame.a, &sub_len);
-	// for (int i = 0; i < sub_len; i++)
-	// 	printf("%d ", subseq[i]);
-	// puts("");
-	// printf("%d\n", sub_len);
-	solve(&frame, subseq, sub_len, frame.a.dim);
-	print_stack(frame);
+void	rrr(t_frame *frame, int v)
+{
+	if (frame->a.dim > 1)
+		rra(&frame->a, 0);
+	if (frame->b.dim > 1)
+		rrb(&frame->b, 0);
+	if (v)
+		write(1, "rrr\n", 4);
 }

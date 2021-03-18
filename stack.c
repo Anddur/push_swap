@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 10:19:25 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/17 11:56:49 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:31:17 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,22 @@ void		fill_stack(char **argv, int argc, t_stack *stack)
 	}
 }
 
-void		print_stack(t_stack stack)
+void		print_stack(t_frame frame)
 {
 	int i;
 
 	i = 0;
-	while (i <= stack.dim - 1)
+	while (i <= frame.a.dim - 1)
 	{
-		printf("[%d] {%d}\n", stack.cont[i][0], stack.cont[i][1]);
+		if (i < frame.a.dim)
+			printf("[%d] {%d} | ", frame.a.cont[i][0], frame.a.cont[i][1]);
+		else
+			printf("          | ");
+		if (i < frame.b.dim)
+			printf("[%d] {%d} | ", frame.b.cont[i][0], frame.b.cont[i][1]);
+		else
+			printf("            ");
+		puts("");
 		i++;
 	}
 }
