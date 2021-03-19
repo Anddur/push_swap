@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 12:46:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/19 19:08:49 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:10:49 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_strjoin_mod(char *s1, char *s2)
 	return (join);
 }
 
-void		check_repeat(char **arg)
+void	check_repeat(char **arg)
 {
 	int i;
 	int j;
@@ -88,7 +88,7 @@ void		check_repeat(char **arg)
 	}
 }
 
-char		**parse_input(char **argv, int argc)
+char	**parse_input(char **argv, int argc)
 {
 	char	*arg;
 	int		i;
