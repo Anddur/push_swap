@@ -6,53 +6,11 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 11:58:48 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 12:38:45 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/19 12:18:20 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	*ft_memmove_int(void *dest, const void *src, size_t n)
-{
-	int			*tmp;
-	const int	*s;
-
-	if (!dest && !src)
-		return (0);
-	if (dest <= src)
-	{
-		tmp = dest;
-		s = src;
-		while (n--)
-			*tmp++ = *s++;
-	}
-	else
-	{
-		tmp = dest;
-		tmp += n;
-		s = src;
-		s += n;
-		while (n--)
-			*--tmp = *--s;
-	}
-	return (dest);
-}
-
-int		find_min(int *arr, int len)
-{
-	int min;
-	int i;
-
-	i = 0;
-	min = arr[i];
-	while (i < len)
-	{
-		if (min > arr[i])
-			min = arr[i];
-		i++;
-	}
-	return (min);
-}
 
 void	rotate_arr(int *copy, int len_seq, int min)
 {
@@ -133,10 +91,10 @@ int		*calc_max_subseq(t_stack *stack, int *sub_len)
 	copy = copy_stack(stack);
 	take_min(copy, stack->dim);
 	lis = calc_lis(copy, stack->dim, &max_lis, &j);
-	if (!(ret = malloc(sizeof(int) * max_lis)))
-		return (0);
+	ret = 0;
 	ret = max_subseq(j, lis, max_lis, copy);
 	free(lis);
+	free(copy);
 	*sub_len = max_lis + 1;
 	return (ret);
 }

@@ -6,95 +6,37 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:44:46 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 19:35:13 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:08:59 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int		find_min_stack(t_stack *stack)
-{
-	int min;
-	int i;
-	int pos;
-
-	i = 0;
-	min = stack->cont[i][0];
-	pos = i;
-	while (i < stack->dim)
-	{
-		if (min > stack->cont[i][0])
-			min = stack->cont[i][0];
-		i++;
-	}
-	return (min);
-}
-
-int		find_max_stack(t_stack *stack)
-{
-	int max;
-	int i;
-	int pos;
-
-	i = 0;
-	max = stack->cont[i][0];
-	pos = i;
-	while (i < stack->dim)
-	{
-		if (max < stack->cont[i][0])
-			max = stack->cont[i][0];
-		i++;
-	}
-	return (max);
-}
-
-void	stupid_sort(t_stack *stack)
-{
-	int min;
-	int max;
-
-	min = find_min_stack(stack);
-	max = find_max_stack(stack);
-	if (stack->cont[0][0] == min)
-	{
-		rra(stack, 1);
-		sa(stack, 1);
-	}
-	else if (stack->cont[2][0] == min)
-	{
-		if (stack->cont[0][0] == max)
-		{
-			sa(stack, 1);
-			rra(stack, 1);
-		}
-		else
-			rra(stack, 1);
-	}
-	else if (stack->cont[0][0] == max)
-		ra(stack, 1);
-	else
-		sa(stack, 1);
-}
 
 int		main(int argc, char **argv)
 {
 	t_frame	frame;
 	int		*subseq;
 	int		sub_len;
+	char	**arg;
+	t_stack	stack[2];
 
+	arg = parse_input(argv, argc);
+	subseq = NULL;
 	sub_len = 0;
-	if (argc < 2)
-		exit(0);
-	frame = create_frame(argc);
-	fill_stack(argv, argc, &frame.a);
-	if (argc == 4)
+	stack[0] = create_stack(ft_arrlen(arg));
+	stack[1] = create_stack(ft_arrlen(arg));
+	frame = create_frame(stack[0], stack[1]);
+	fill_stack(arg, argc, &frame.a);
+	if (ft_arrlen(arg) == 3)
 		stupid_sort(&frame.a);
+	else if (ft_arrlen(arg) == 5)
+		stupid_sort_five(&frame, subseq);
 	else
 	{
 		enumerate_stack(&frame.a);
 		subseq = calc_max_subseq(&frame.a, &sub_len);
 		solve(&frame, subseq, sub_len, frame.a.dim);
 	}
-	//free_stack(&frame);
-	sleep(100000000);
+	free_arg(arg);
+	free_frame(stack[0], stack[1], ft_arrlen(arg), subseq);
 }

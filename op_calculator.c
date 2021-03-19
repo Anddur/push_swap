@@ -1,50 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   op_calculator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 10:28:13 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/19 18:54:08 by aduregon         ###   ########.fr       */
+/*   Created: 2021/03/19 12:19:51 by aduregon          #+#    #+#             */
+/*   Updated: 2021/03/19 12:20:33 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_frame(t_stack a, t_stack b, int arg, int *subseq)
+int		count_op(int a, int b)
 {
-	free_stack(a, arg);
-	free_stack(b, arg);
-	free(subseq);
+	if ((a * b) > 0)
+		return (MAX(ABS(a), ABS(b)));
+	else
+		return (ABS(a) + ABS(b));
 }
 
-void	free_stack(t_stack stack, int argc)
+void	compare_op(int tmp1, int tmp2, int *a, int *b)
 {
-	int i;
-
-	i = 0;
-	while (i < argc)
+	if (count_op(tmp1, tmp2) < count_op(*a, *b))
 	{
-		free(stack.cont[i++]);
+		*a = tmp1;
+		*b = tmp2;
 	}
-	free(stack.cont);
-}
-
-void	free_arg(char **arg)
-{
-	int i;
-	int dim;
-
-	i = 0;
-	dim = ft_arrlen(arg);
-	while (i < dim)
-		free(arg[i++]);
-	free(arg);
-}
-
-void	exit_error(void)
-{
-	write(1, "Error\n", 6);
-	exit(-1);
 }

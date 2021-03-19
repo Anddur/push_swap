@@ -6,19 +6,11 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 14:43:00 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/18 18:23:23 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/19 12:20:29 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int		count_op(int a, int b)
-{
-	if ((a * b) > 0)
-		return (MAX(ABS(a), ABS(b)));
-	else
-		return (ABS(a) + ABS(b));
-}
 
 int		find_max_pos(int **a, int dim)
 {
@@ -70,15 +62,6 @@ int		find_place(int **a, int b, int dim)
 	return (max_pos);
 }
 
-void	compare_op(int tmp1, int tmp2, int *a, int *b)
-{
-	if (count_op(tmp1, tmp2) < count_op(*a, *b))
-	{
-		*a = tmp1;
-		*b = tmp2;
-	}
-}
-
 void	find_best(t_frame *frame, int *a, int *b)
 {
 	int i;
@@ -95,7 +78,8 @@ void	find_best(t_frame *frame, int *a, int *b)
 		tmp[1] = i;
 		compare_op(tmp[0], tmp[1], a, b);
 		tmp[0] = find_place(frame->a.cont,
-				frame->b.cont[(frame->b.dim - i) % frame->b.dim][0], frame->a.dim);
+				frame->b.cont[(frame->b.dim - i) %
+				frame->b.dim][0], frame->a.dim);
 		tmp[1] = -i;
 		compare_op(tmp[0], tmp[1], a, b);
 		i++;

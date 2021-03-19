@@ -6,13 +6,13 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 11:55:59 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/17 12:13:43 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/19 12:16:07 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	merge(int *copy_arr, int l, int m, int r)
+void		merge(int *copy_arr, int l, int m, int r)
 {
 	int i;
 	int j;
@@ -37,7 +37,7 @@ void	merge(int *copy_arr, int l, int m, int r)
 	}
 }
 
-void	merge_sort(int *copy_arr, int l, int r)
+void		merge_sort(int *copy_arr, int l, int r)
 {
 	int		m;
 
@@ -71,4 +71,5 @@ void		enumerate_stack(t_stack *stack)
 		}
 		i++;
 	}
+	free(copy_arr);
 }

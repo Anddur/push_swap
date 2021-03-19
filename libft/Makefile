@@ -68,21 +68,21 @@ FLAGS	= -Wall -Wextra -Werror
 INCS	= .
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
+	@${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I ${INCS}
 
 $(NAME): ${OBJS}
-	${LIBC} $(NAME) $(OBJS)
+	@${LIBC} $(NAME) $(OBJS)
 
 all: $(NAME)
 
 bonus: $(NAME) $(OBJS_B)
-	${LIBC} $(NAME) $(OBJS_B)
+	@${LIBC} $(NAME) $(OBJS_B)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(OBJS_B)
+	@$(RM) $(OBJS) $(OBJS_B)
 
 re: fclean all
 
