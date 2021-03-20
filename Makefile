@@ -1,4 +1,5 @@
-NAME	=	push_swap
+NAME1	=	push_swap
+NAME2	=	checker
 
 LIBFT	=	./libft/libft.a
 
@@ -8,41 +9,60 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 RM		=	rm -f
 
-SRCS	=	push_swap.c \
-			frame.c \
-			stack.c \
-			free.c \
-			enumerate_stack.c \
-			max_subseq.c \
-			operation_a.c \
-			operation_b.c \
-			operation_mix.c \
-			algorithm.c \
-			divide_stack.c \
-			merge_stack.c \
-			min_stack.c \
-			op_calculator.c \
-			parse_input.c \
-			stupid_sort.c
+SRCS1	=	push_swap_src/push_swap.c \
+			push_swap_src/frame.c \
+			push_swap_src/stack.c \
+			push_swap_src/free.c \
+			push_swap_src/enumerate_stack.c \
+			push_swap_src/max_subseq.c \
+			push_swap_src/operation_a.c \
+			push_swap_src/operation_b.c \
+			push_swap_src/operation_mix.c \
+			push_swap_src/algorithm.c \
+			push_swap_src/divide_stack.c \
+			push_swap_src/merge_stack.c \
+			push_swap_src/min_stack.c \
+			push_swap_src/op_calculator.c \
+			push_swap_src/parse_input.c \
+			push_swap_src/stupid_sort.c
 
-OBJS	=	$(SRCS:.c=.o)
+SRCS2	=	checker_src/checker.c \
+			checker_src/frame.c \
+			checker_src/free.c \
+			checker_src/operation_a.c \
+			checker_src/operation_b.c \
+			checker_src/operation_mix.c \
+			checker_src/parse_input.c \
+			checker_src/stack.c
 
-%.o	:	%.c
-			@$(CC) $(CFLAGS) -c $< -o $@
+OBJS1	=	$(SRCS1:.c=.o)
+OBJS2	=	$(SRCS2:.c=.o)
 
-$(NAME)	:	$(OBJS)
+%.o			:	%.c
+			@$(CC) $(CFLAGS) -c $^ -o $@
+
+$(NAME1)	:	$(OBJS1)
 			@make -C ./libft
-			@$(CC) $(CFLAGS) -o $(NAME) $(LIBFT) $(OBJS)
+			@$(CC) $(CFLAGS) -o $(NAME1) $(LIBFT) $(OBJS1)
 			@echo "\033[0;32mPUSH_SWAP COMPILED\033[0;0m"
 
-all		:	$(NAME)
+$(NAME2)	:	$(OBJS2)
+			@make -C ./libft
+			@$(CC) $(CFLAGS) -o $(NAME2) $(LIBFT) $(OBJS2)
+			@echo "\033[0;32mCHECKER COMPILED\033[0;0m"
+
+checker		:	$(NAME2)
+
+push_swap	:	$(NAME1)
+
+all		:	push_swap checker
 
 clean	:	
-			$(RM) $(OBJS)
+			$(RM) push_swap_src/*.o checker_src/*.o
 			@make clean -C ./libft
 
 fclean	:	clean
-			@$(RM) $(NAME)
+			@$(RM) $(NAME1) $(NAME2)
 			@make fclean -C ./libft
 			@echo "\033[0;31mPUSH_SWAP CLEAN\033[0;0m"
 
@@ -50,4 +70,4 @@ bonus	:
 
 re		: fclean all
 
-.PHONY	:	all clean fclean bonus re
+.PHONY	:	all clean fclean bonus re checker push_swap

@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 10:19:25 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/19 16:39:28 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/20 09:41:53 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			ft_arrlen(char **arr)
 	return (i);
 }
 
-void		fill_stack(char **arg, int argc, t_stack *stack)
+void		fill_stack(char **arg, t_stack *stack)
 {
 	int	i;
 	int atoi;

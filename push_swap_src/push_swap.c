@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:44:46 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/19 19:08:59 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/20 09:45:16 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 	stack[0] = create_stack(ft_arrlen(arg));
 	stack[1] = create_stack(ft_arrlen(arg));
 	frame = create_frame(stack[0], stack[1]);
-	fill_stack(arg, argc, &frame.a);
+	fill_stack(arg, &frame.a);
 	if (ft_arrlen(arg) == 3)
 		stupid_sort(&frame.a);
 	else if (ft_arrlen(arg) == 5)
