@@ -33,7 +33,10 @@ SRCS2	=	checker_src/checker.c \
 			checker_src/operation_b.c \
 			checker_src/operation_mix.c \
 			checker_src/parse_input.c \
-			checker_src/stack.c
+			checker_src/stack.c \
+			checker_src/verbose.c \
+			checker_src/print_exit.c \
+			checker_src/check_stack.c
 
 OBJS1	=	$(SRCS1:.c=.o)
 OBJS2	=	$(SRCS2:.c=.o)
@@ -51,20 +54,17 @@ $(NAME2)	:	$(OBJS2)
 			@$(CC) $(CFLAGS) -o $(NAME2) $(LIBFT) $(OBJS2)
 			@echo "\033[0;32mCHECKER COMPILED\033[0;0m"
 
-checker		:	$(NAME2)
-
-push_swap	:	$(NAME1)
-
-all		:	push_swap checker
+all		:	$(NAME1) $(NAME2)
 
 clean	:	
-			$(RM) push_swap_src/*.o checker_src/*.o
+			@$(RM) push_swap_src/*.o checker_src/*.o
 			@make clean -C ./libft
 
 fclean	:	clean
 			@$(RM) $(NAME1) $(NAME2)
 			@make fclean -C ./libft
-			@echo "\033[0;31mPUSH_SWAP CLEAN\033[0;0m"
+			@echo "\033[0;33mCHECKER CLEAN\033[0;0m"
+			@echo "\033[0;33mPUSH_SWAP CLEAN\033[0;0m"
 
 bonus	:
 

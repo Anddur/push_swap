@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 11:52:56 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/20 12:43:27 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/20 16:47:30 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@
 # define YEL  "\x1B[33m"
 # define BLU  "\x1B[34m"
 # define MAG  "\x1B[35m"
+# define PNK  "\033[255;161;244m"
 # define CYN  "\x1B[36m"
 # define WHT  "\x1B[37m"
+# define GRY  "\e[0;37m"
 
 # define BRED  "\x1B[41m"
 # define BGRN  "\x1B[42m"
@@ -41,6 +43,10 @@
 # define BWHT  "\x1B[47m"
 
 # define WHTBLK "\x1B[47m\x1B[30m"
+# define CYNBLK "\x1B[46m\x1B[30m"
+# define MAGBLK "\x1B[45m\x1B[30m"
+# define MAGWHT "\x1B[45m\x1B[37m"
+# define REDWHT "\x1B[41m\x1B[37m"
 
 typedef struct	s_stack
 {
@@ -76,5 +82,11 @@ int				ft_arrlen(char **arr);
 void			fill_stack(char **arg, t_stack *stack);
 void			print_stack(t_frame frame);
 int				*copy_stack(t_stack *stack);
+void			print_success(void);
+void			print_fail(void);
+int				check_op(char *cmd);
+void			decide_op(char *cmd, t_frame *frame);
+int				is_order(t_frame frame);
+void			checker(t_frame frame, int flag);
 
 #endif
