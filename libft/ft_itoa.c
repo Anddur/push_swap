@@ -3,73 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 13:32:58 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 13:33:01 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 11:01:21 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 11:01:23 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_number_len(int n)
+static	size_t		ft_nsize(int n)
 {
-	unsigned int	nbr;
-	int				len;
+	size_t size;
 
-	len = 0;
-	if (n < 0)
+	size = (n < 0 ? 1 : 0);
+	while (1)
 	{
-		len++;
-		nbr = -n;
+		n /= 10;
+		size++;
+		if (n == 0)
+			break ;
 	}
-	else
-		nbr = n;
-	if (nbr == 0)
-		return (1);
-	while (nbr)
-	{
-		nbr /= 10;
-		len++;
-	}
-	return (len);
+	return (size);
 }
 
-static void	ft_rec_itoa(char **ptr, unsigned int nbr)
+char				*ft_itoa(int n)
 {
-	if (nbr < 10)
-	{
-		**ptr = '0' + nbr;
-		(*ptr)++;
-		**ptr = 0;
-		return ;
-	}
-	ft_rec_itoa(ptr, nbr / 10);
-	**ptr = (nbr % 10) + '0';
-	(*ptr)++;
-	return ;
-}
+	size_t	size;
+	char	*itoa;
+	long	number;
 
-char		*ft_itoa(int n)
-{
-	char			*res;
-	char			*begin;
-	int				n_len;
-	unsigned int	nbr;
-
-	n_len = ft_number_len(n);
-	if (!(res = malloc((n_len + 1) * sizeof(char))))
-		return (0);
-	begin = res;
-	if (n < 0)
+	number = n;
+	size = ft_nsize(n);
+	if (!(itoa = ft_calloc(size + 1, sizeof(char))))
+		return (NULL);
+	if (number < 0)
 	{
-		*res = '-';
-		res++;
-		nbr = -n;
+		itoa[0] = '-';
+		number *= -1;
 	}
-	else
-		nbr = n;
-	ft_rec_itoa(&res, nbr);
-	*res = 0;
-	return (begin);
+	itoa[size] = '\0';
+	while (1)
+	{
+		itoa[size - 1] = (number % 10) + 48;
+		number /= 10;
+		size--;
+		if (number == 0)
+			break ;
+	}
+	return (itoa);
 }

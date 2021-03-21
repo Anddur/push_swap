@@ -5,19 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 15:26:41 by mcossu            #+#    #+#             */
-/*   Updated: 2021/03/13 12:11:33 by aduregon         ###   ########.fr       */
+/*   Created: 2021/01/12 11:05:01 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 11:05:04 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_lst **lst, t_lst *new)
+void		ft_lstadd_back(t_list **alst, t_list *new)
 {
-	if (!*lst)
+	t_list *lastelem;
+
+	if (*alst == NULL)
 	{
-		*lst = new;
-		return ;
+		*alst = new;
 	}
-	ft_lstlast(*lst)->next = new;
+	else
+	{
+		lastelem = ft_lstlast(*alst);
+		if (lastelem != NULL)
+			lastelem->next = new;
+	}
 }

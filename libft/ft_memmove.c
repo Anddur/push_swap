@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memmove.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:39:33 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:39:35 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:54:53 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:54:55 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t i;
+	unsigned char	*src_temp;
+	unsigned char	*dst_temp;
+	size_t			index;
 
-	i = 0;
-	if (!dest && !src)
-		return (0);
-	if (dest > src)
-		while (len--)
-			*(unsigned char *)(dest + len) = *(unsigned char *)(src + len);
+	src_temp = (unsigned char *)src;
+	dst_temp = (unsigned char *)dst;
+	index = 0;
+	if (src_temp < dst_temp)
+	{
+		while (len-- > 0)
+			dst_temp[len] = src_temp[len];
+	}
 	else
-		while (i < len)
+	{
+		while (index < len)
 		{
-			*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
-			i++;
+			dst_temp[index] = src_temp[index];
+			index++;
 		}
-	return (dest);
+	}
+	return (dst);
 }

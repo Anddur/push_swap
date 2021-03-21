@@ -1,46 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:41:34 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:41:35 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:50:36 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:50:50 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		is_numeric(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
 int		ft_atoi(const char *str)
 {
-	int				minus;
-	unsigned int	result;
+	size_t				index;
+	int					neg;
+	unsigned long int	res;
 
-	minus = 1;
-	result = 0;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
+	index = 0;
+	neg = 1;
+	res = 0;
+	while (ft_isspace(str[index]))
+		index++;
+	if (str[index] == '+' || str[index] == '-')
 	{
-		if (*str == '-')
-			minus = -1;
-		str++;
+		if (str[index] == '-')
+			neg = -1;
+		index++;
 	}
-	if (!is_numeric(*str))
-		return (-1);
-	while (is_numeric(*str) && result <= 2147483647)
+	while (ft_isdigit(str[index]))
 	{
-		result = (result * 10) + (*str - '0');
-		str++;
+		res *= 10;
+		res += str[index] - 48;
+		index++;
 	}
-	if ((result == 2147483648 && minus == -1)
-		|| result <= 2147483647)
-		return (minus * result);
-	return (minus == 1 ? -1 : 0);
+	return (res * neg);
 }

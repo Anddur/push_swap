@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 17:26:54 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/20 17:47:50 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:18:24 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,54 +26,54 @@ int		is_order(t_stack stack)
 	return (1);
 }
 
-void	stupid_sort(t_stack *stack)
+void	stupid_sort(t_frame *frame, int vis)
 {
 	int val[2];
 
-	if (is_order(*stack))
+	if (is_order(frame->a))
 		return ;
-	val[0] = find_min_stack(stack);
-	val[1] = find_max_stack(stack);
-	if (stack->cont[0][0] == val[0])
+	val[0] = find_min_stack(&frame->a);
+	val[1] = find_max_stack(&frame->a);
+	if (frame->a.cont[0][0] == val[0])
 	{
-		rra(stack, 1);
-		sa(stack, 1);
+		rra(frame, vis);
+		sa(frame, vis);
 	}
-	else if (stack->cont[2][0] == val[0])
+	else if (frame->a.cont[2][0] == val[0])
 	{
-		if (stack->cont[0][0] == val[1])
+		if (frame->a.cont[0][0] == val[1])
 		{
-			sa(stack, 1);
-			rra(stack, 1);
+			sa(frame, vis);
+			rra(frame, vis);
 		}
 		else
-			rra(stack, 1);
+			rra(frame, 1);
 	}
-	else if (stack->cont[0][0] == val[1])
-		ra(stack, 1);
+	else if (frame->a.cont[0][0] == val[1])
+		ra(frame, vis);
 	else
-		sa(stack, 1);
+		sa(frame, vis);
 }
 
-void	choose_op(int *j, int *i, t_frame *frame)
+void	choose_op(int *j, int *i, t_frame *frame, int vis)
 {
 	if (*j == 0)
 	{
-		pa(frame, 1);
+		pa(frame, vis);
 		(*i)++;
 		return ;
 	}
 	if (*j > frame->a.dim / 2)
 		while (frame->a.dim - (*j)++ > 0)
-			rra(&frame->a, 1);
+			rra(frame, vis);
 	else
 		while (*j-- > 0)
-			ra(&frame->a, 1);
-	pa(frame, 1);
+			ra(frame, vis);
+	pa(frame, vis);
 	(*i)++;
 }
 
-void	stupid_sort_five(t_frame *frame, int *subseq)
+void	stupid_sort_five(t_frame *frame, int *subseq, int vis)
 {
 	int		sub_len;
 
@@ -83,19 +83,19 @@ void	stupid_sort_five(t_frame *frame, int *subseq)
 	free(subseq);
 	if (sub_len == 5)
 	{
-		stack_align(frame->a);
+		stack_align(frame, vis);
 		return ;
 	}
 	while (frame->b.dim != 2)
 	{
 		if (frame->a.cont[0][1] < 3)
-			pb(frame, 1);
+			pb(frame, vis);
 		else
-			ra(&frame->a, 1);
+			ra(frame, vis);
 	}
-	stupid_sort(&frame->a);
+	stupid_sort(frame, vis);
 	if (frame->b.cont[0][1] == 1)
-		sb(&frame->b, 1);
-	pa(frame, 1);
-	pa(frame, 1);
+		sb(frame, vis);
+	pa(frame, vis);
+	pa(frame, vis);
 }

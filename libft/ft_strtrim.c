@@ -3,48 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <mcossu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:44:23 by mcossu            #+#    #+#             */
-/*   Updated: 2021/03/02 18:12:49 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 11:00:44 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 11:00:45 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isset(char c, char const *set)
+static	int		ft_chrcmp(char c, char const *set)
 {
-	while (*set)
-		if (c == *set++)
+	size_t	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
 			return (1);
+		i++;
+	}
 	return (0);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char			*ft_strtrim(char const *s1, char const *set)
 {
-	char		*res;
-	char const	*begin;
-	size_t		j;
-	size_t		i;
+	char	*str;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
+	start = 0;
+	while (s1[start] && ft_chrcmp(s1[start], set))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_chrcmp(s1[end - 1], set))
+		end--;
+	str = (char*)malloc(sizeof(*s1) * (end - start + 1));
+	if (!str)
+		return (NULL);
 	i = 0;
-	if (!s1 || !set)
-		return (0);
-	while (s1[i] && ft_isset(s1[i], set))
-		i++;
-	begin = (s1 + i);
-	j = ft_strlen(s1);
-	if (i >= j || !*s1)
-	{
-		if (!(res = (char *)malloc((1) * sizeof(char))))
-			return (0);
-		*res = 0;
-		return (res);
-	}
-	while ((s1 + j) != begin && ft_isset(*(s1 + j), set))
-		j--;
-	if (!(res = (char *)malloc((j - i + 2) * sizeof(char))))
-		return (0);
-	ft_strlcpy(res, begin, j - i + 2);
-	return (res);
+	while (start < end)
+		str[i++] = s1[start++];
+	str[i] = 0;
+	return (str);
 }

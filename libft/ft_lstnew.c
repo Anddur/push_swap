@@ -5,20 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 15:01:37 by mcossu            #+#    #+#             */
-/*   Updated: 2021/03/13 12:20:25 by aduregon         ###   ########.fr       */
+/*   Created: 2021/01/12 11:03:41 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/26 17:06:53 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst	*ft_lstnew(void *content)
+t_list		*ft_lstnew(void *content)
 {
-	t_lst *res;
+	t_list *element;
 
-	if (!(res = (t_lst *)malloc(sizeof(t_lst))))
-		return (0);
-	res->cont = content;
-	res->next = 0;
-	return (res);
+	if (!(element = malloc(sizeof(t_list))))
+		return (NULL);
+	element->content = content;
+	element->next = NULL;
+	return (element);
 }

@@ -24,7 +24,8 @@ SRCS1	=	push_swap_src/push_swap.c \
 			push_swap_src/min_stack.c \
 			push_swap_src/op_calculator.c \
 			push_swap_src/parse_input.c \
-			push_swap_src/stupid_sort.c
+			push_swap_src/stupid_sort.c \
+			push_swap_src/visual.c
 
 SRCS2	=	checker_src/checker.c \
 			checker_src/frame.c \
@@ -41,28 +42,29 @@ SRCS2	=	checker_src/checker.c \
 OBJS1	=	$(SRCS1:.c=.o)
 OBJS2	=	$(SRCS2:.c=.o)
 
+all		:	$(NAME1) $(NAME2)
+
 %.o			:	%.c
 			@$(CC) $(CFLAGS) -c $^ -o $@
 
 $(NAME1)	:	$(OBJS1)
-			@make -C ./libft
+			@make -C ./libft &> /dev/null
 			@$(CC) $(CFLAGS) -o $(NAME1) $(LIBFT) $(OBJS1)
 			@echo "\033[0;32mPUSH_SWAP COMPILED\033[0;0m"
 
 $(NAME2)	:	$(OBJS2)
-			@make -C ./libft
+			@make -C ./libft &> /dev/null
 			@$(CC) $(CFLAGS) -o $(NAME2) $(LIBFT) $(OBJS2)
 			@echo "\033[0;32mCHECKER COMPILED\033[0;0m"
 
-all		:	$(NAME1) $(NAME2)
 
 clean	:	
-			@$(RM) push_swap_src/*.o checker_src/*.o
 			@make clean -C ./libft
+			@$(RM) push_swap_src/*.o checker_src/*.o
 
 fclean	:	clean
-			@$(RM) $(NAME1) $(NAME2)
 			@make fclean -C ./libft
+			@$(RM) $(NAME1) $(NAME2)
 			@echo "\033[0;33mCHECKER CLEAN\033[0;0m"
 			@echo "\033[0;33mPUSH_SWAP CLEAN\033[0;0m"
 

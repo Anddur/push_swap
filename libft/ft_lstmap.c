@@ -3,30 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <mcossu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 16:32:50 by mcossu            #+#    #+#             */
-/*   Updated: 2021/02/02 16:05:48 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 11:06:03 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 11:06:05 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_lst	*ft_lstmap(t_lst *lst, void *(*f)(void *), void (*del)(void *))
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_lst *res;
-	t_lst *temp;
+	t_list	*new_lst;
+	t_list	*new_elem;
 
-	res = 0;
+	if (!lst || !f)
+		return (NULL);
+	if (!(new_elem = ft_lstnew(f(lst->content))))
+	{
+		ft_lstclear(&lst, del);
+		return (NULL);
+	}
+	new_lst = new_elem;
+	lst = lst->next;
 	while (lst)
 	{
-		if (!(temp = ft_lstnew(f(lst->cont))))
+		if (!(new_elem = ft_lstnew(f(lst->content))))
 		{
-			ft_lstclear(&res, del);
-			return (0);
+			ft_lstclear(&lst, del);
+			ft_lstclear(&new_lst, del);
+			break ;
 		}
-		ft_lstadd_back(&res, temp);
 		lst = lst->next;
+		ft_lstadd_back(&new_lst, new_elem);
 	}
-	return (res);
+	return (new_lst);
 }

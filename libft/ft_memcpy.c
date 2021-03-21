@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memcpy.c                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:39:04 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:39:07 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:54:40 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:54:42 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t	i;
+	size_t index;
 
-	i = 0;
-	if (!dest && !src)
-		return (0);
-	while (i < n)
+	index = 0;
+	while (src && index < n)
 	{
-		*(unsigned char *)(dest + i) = *(const unsigned char *)(src + i);
-		i++;
+		((unsigned char *)dst)[index] = ((unsigned char *)src)[index];
+		index++;
 	}
-	return (dest);
+	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 10:28:13 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/19 18:54:08 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:53:07 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	free_arg(char **arg)
 
 void	exit_error(void)
 {
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(-1);
 }

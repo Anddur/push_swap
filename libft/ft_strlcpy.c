@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlcpy.c                                          :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:40:21 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:40:23 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:56:30 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:56:33 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t size_src;
+	size_t index;
 
-	size_src = 0;
-	if (!dest && !src)
-		return (0);
-	if (size == 0)
+	index = 0;
+	if (dstsize == 0)
 	{
-		while (src[size_src])
-			size_src++;
-		return (size_src);
+		while (src[index])
+			index++;
+		return (index);
 	}
-	while (size_src < size - 1 && src[size_src])
+	while (index < dstsize - 1 && src[index] != 0)
 	{
-		dest[size_src] = src[size_src];
-		size_src++;
+		((unsigned char *)dst)[index] = ((unsigned char *)src)[index];
+		index++;
 	}
-	if (size_src < size)
-		dest[size_src] = 0;
-	while (src[size_src])
-		size_src++;
-	return (size_src);
+	dst[index] = '\0';
+	return (ft_strlen(src));
 }

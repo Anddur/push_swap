@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memchr.c                                           :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:39:46 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:39:48 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:53:51 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:53:53 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t i;
+	size_t index;
 
-	i = 0;
-	while (i < n)
+	index = 0;
+	while (index < n)
 	{
-		if (*(unsigned char *)(s + i) == (unsigned char)c)
-			return ((void *)s + i);
-		i++;
+		if (((unsigned char *)s)[index] == (unsigned char)c)
+			return (((unsigned char *)s) + index);
+		index++;
 	}
-	return (0);
+	return (NULL);
 }

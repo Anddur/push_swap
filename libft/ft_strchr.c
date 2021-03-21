@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <mcossu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:40:51 by mcossu            #+#    #+#             */
-/*   Updated: 2021/03/02 17:56:55 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:55:39 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:55:41 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s && *s != (char)c)
-		s++;
-	if (*s == (char)c)
-		return ((char *)s);
-	return (0);
+	return (ft_memchr(s, c, ft_strlen(s) + 1));
 }

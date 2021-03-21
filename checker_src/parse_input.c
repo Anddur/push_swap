@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 12:46:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/20 12:06:32 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:36:30 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,21 @@ void	check_repeat(char **arg)
 	}
 }
 
+void	check_maxint(char **arg)
+{
+	int			i;
+	long int	value;
+
+	i = 0;
+	while (arg[i])
+	{
+		value = ft_atoi_long(arg[i]);
+		if (value > 2147483647 || value < -2147483648)
+			exit_error();
+		i++;
+	}
+}
+
 char	**parse_input(char **argv, int argc)
 {
 	char	*arg;
@@ -99,5 +114,6 @@ char	**parse_input(char **argv, int argc)
 	split = ft_split(arg, ' ');
 	free(arg);
 	check_repeat(split);
+	check_maxint(split);
 	return (split);
 }

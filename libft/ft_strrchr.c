@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strrchr.c                                          :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:41:00 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:41:02 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:58:28 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:58:30 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char *new;
+	size_t index;
 
-	new = 0;
-	while (*s)
+	index = ft_strlen(s);
+	while (1)
 	{
-		if (*s == (char)c)
-			new = (char *)s;
-		s++;
+		if (((unsigned char *)s)[index] == (unsigned char)c)
+			return ((char *)s + index);
+		if (index == 0)
+			break ;
+		index--;
 	}
-	if ((char)c == 0)
-		return ((char *)s);
-	return (new);
+	return (NULL);
 }

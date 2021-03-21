@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnstr.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: forsili <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:41:11 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:41:13 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:58:00 by aduregon          #+#    #+#             */
+/*   Updated: 2021/02/19 16:36:27 by forsili          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t n)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t i;
-	size_t j;
+	size_t index;
+	size_t find;
 
-	i = 0;
-	j = 0;
-	while (str[i + j] && (i + j) < n)
+	index = 0;
+	find = 0;
+	if (needle[index] == 0)
+		return ((char *)haystack);
+	while (haystack[index] != 0 && index < len)
 	{
-		if (to_find[j] == '\0')
-			return ((char *)str + i);
-		if (str[i + j] != to_find[j])
+		find = 0;
+		while (haystack[index + find] == needle[find] && index + find < len)
 		{
-			j = 0;
-			i++;
+			if (find == ft_strlen(needle) - 1)
+				return ((char *)haystack + index);
+			find++;
 		}
-		else
-			j++;
+		index++;
 	}
-	if ((!str[i + j] && !to_find[j]) ||
-		((i + j) == n && !to_find[j]))
-		return ((char *)str + i);
-	return (0);
+	return (NULL);
 }

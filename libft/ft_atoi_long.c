@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_sorted.c                                 :+:      :+:    :+:   */
+/*   ft_atoi_long.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/13 12:08:59 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/13 12:09:00 by aduregon         ###   ########.fr       */
+/*   Created: 2021/03/21 12:35:55 by aduregon          #+#    #+#             */
+/*   Updated: 2021/03/21 12:36:38 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_sorted(t_lst **head, t_lst *new,
-						int (*cmp)(void *, void *))
+long int	ft_atoi_long(const char *str)
 {
-	t_lst	*it;
-	void	*temp;
+	size_t				index;
+	int					neg;
+	unsigned long int	res;
 
-	if (!head)
-		return ;
-	it = *head;
-	*head = new;
-	new->next = it;
-	it = new;
-	while (it->next)
+	index = 0;
+	neg = 1;
+	res = 0;
+	while (ft_isspace(str[index]))
+		index++;
+	if (str[index] == '+' || str[index] == '-')
 	{
-		if (cmp(it->cont, it->next->cont) > 0)
-		{
-			temp = it->cont;
-			it->cont = it->next->cont;
-			it->next->cont = temp;
-			it = it->next;
-		}
-		else
-			return ;
+		if (str[index] == '-')
+			neg = -1;
+		index++;
 	}
+	while (ft_isdigit(str[index]))
+	{
+		res *= 10;
+		res += str[index] - 48;
+		index++;
+	}
+	return (res * neg);
 }

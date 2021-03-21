@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_in_charset.c                                 :+:      :+:    :+:   */
+/*   ft_isspace_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <mcossu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/16 18:18:27 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/16 18:21:13 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/11 17:43:10 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/27 22:41:56 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	ft_is_in_charset(char c, const char *charset)
+int		ft_isspace(int c)
 {
-	while (*charset)
-	{
-		if (*charset == c)
-			return (c);
-		charset++;
-	}
-	return (0);
+	unsigned char c1;
+
+	c1 = c;
+	return ((c == ' ' || c == '\n' || c == '\t' ||
+			c == '\v' || c == '\f' || c == '\r'));
 }

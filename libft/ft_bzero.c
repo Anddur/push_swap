@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bzero.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:38:51 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:38:53 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:51:06 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:51:09 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t			i;
-	unsigned char	*ptr;
+	size_t index;
 
-	i = 0;
-	ptr = s;
-	while (i < n)
-		ptr[i++] = 0;
+	index = 0;
+	if (n == 0)
+		return ;
+	else
+		while (index < n)
+			((unsigned char *)s)[index++] = 0;
 }

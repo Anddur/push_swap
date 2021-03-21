@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:44:12 by mcossu            #+#    #+#             */
-/*   Updated: 2021/03/19 15:38:56 by aduregon         ###   ########.fr       */
+/*   Created: 2021/01/12 11:00:29 by aduregon          #+#    #+#             */
+/*   Updated: 2021/03/21 12:04:44 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 char		*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	res_len;
-	char	*res;
+	char	*strjoin;
+	size_t	dim_s1;
+	size_t	dim_s2;
+	size_t	tot_len;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (0);
-	res_len = ft_strlen(s1) + ft_strlen(s2);
-	if (!(res = (char *)malloc((res_len + 1) * sizeof(char))))
-		return (0);
-	while (*s1)
-		*res++ = *s1++;
-	while (*s2)
-		*res++ = *s2++;
-	*res = 0;
-	return (res - res_len);
+	dim_s1 = ft_strlen((char *)s1);
+	dim_s2 = ft_strlen((char *)s2);
+	tot_len = dim_s1 + dim_s2 + 1;
+	if (!(strjoin = malloc(tot_len * sizeof(char))))
+		return (NULL);
+	ft_memcpy(strjoin, s1, dim_s1);
+	ft_memcpy(strjoin + dim_s1, s2, dim_s2);
+	strjoin[tot_len - 1] = '\0';
+	free((char *)s1);
+	return (strjoin);
 }

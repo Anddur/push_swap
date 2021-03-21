@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 14:43:00 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/19 12:20:29 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:43:17 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	find_best(t_frame *frame, int *a, int *b)
 	}
 }
 
-void	multi_op(t_frame *frame, int *a, int *b)
+void	multi_op(t_frame *frame, int *a, int *b, int vis)
 {
 	int		i;
 	int		tmp;
@@ -98,40 +98,40 @@ void	multi_op(t_frame *frame, int *a, int *b)
 		if (*a > 0)
 			while (i++ < ABS(tmp))
 			{
-				rr(frame, 1);
+				rr(frame, vis);
 				(*a)--;
 				(*b)--;
 			}
 		else
 			while (i++ < ABS(tmp))
 			{
-				rrr(frame, 1);
+				rrr(frame, vis);
 				(*a)++;
 				(*b)++;
 			}
 	}
 }
 
-void	merge_stack(t_frame *frame)
+void	merge_stack(t_frame *frame, int vis)
 {
 	int		op[2];
 	int		i;
 
 	i = 0;
 	find_best(frame, &op[0], &op[1]);
-	multi_op(frame, &op[0], &op[1]);
+	multi_op(frame, &op[0], &op[1], vis);
 	if (op[0] > 0)
 		while (i++ < op[0])
-			ra(&frame->a, 1);
+			ra(frame, vis);
 	else
 		while (i++ < ABS(op[0]))
-			rra(&frame->a, 1);
+			rra(frame, vis);
 	i = 0;
 	if (op[1] > 0)
 		while (i++ < op[1])
-			rb(&frame->b, 1);
+			rb(frame, vis);
 	else
 		while (i++ < ABS(op[1]))
-			rrb(&frame->b, 1);
-	pa(frame, 1);
+			rrb(frame, vis);
+	pa(frame, vis);
 }

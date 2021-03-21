@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/19 12:46:44 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/19 19:10:49 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:39:46 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@ int		is_correct(char *argv)
 	if (argv[i] == 'u')
 		exit_error();
 	return (1);
-}
-
-int		is_string(char *argv)
-{
-	int i;
-
-	i = 0;
-	while (argv[i])
-		if (argv[i++] == ' ')
-			return (1);
-	return (0);
 }
 
 char	*ft_strjoin_mod(char *s1, char *s2)
@@ -88,6 +77,21 @@ void	check_repeat(char **arg)
 	}
 }
 
+void	check_maxint(char **arg)
+{
+	int			i;
+	long int	value;
+
+	i = 0;
+	while (arg[i])
+	{
+		value = ft_atoi_long(arg[i]);
+		if (value > 2147483647 || value < -2147483648)
+			exit_error();
+		i++;
+	}
+}
+
 char	**parse_input(char **argv, int argc)
 {
 	char	*arg;
@@ -97,6 +101,10 @@ char	**parse_input(char **argv, int argc)
 	if (argc < 2)
 		exit_error();
 	i = 1;
+	if (!ft_strcmp(argv[1], "-v"))
+		i++;
+	if (!(arg = ft_calloc(1, sizeof(char))))
+		exit(0);
 	while (argv[i] && is_correct(argv[i]))
 	{
 		arg = ft_strjoin_mod(arg, argv[i]);
@@ -106,5 +114,6 @@ char	**parse_input(char **argv, int argc)
 	split = ft_split(arg, ' ');
 	free(arg);
 	check_repeat(split);
+	check_maxint(split);
 	return (split);
 }

@@ -5,99 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 12:15:22 by mcossu            #+#    #+#             */
-/*   Updated: 2021/03/19 16:07:06 by aduregon         ###   ########.fr       */
+/*   Created: 2021/01/12 11:00:58 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 11:01:02 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char			*ft_strdupe(char const *src, char const *end)
+static unsigned int		count_word(char const *s, char c)
 {
-	char *cpy;
-	char *start;
+	unsigned int	index;
+	unsigned int	num_word;
 
-	if (!(cpy = (char *)malloc((end - src + 2) * sizeof(char))))
+	if (!s[0])
 		return (0);
-	start = cpy;
-	while (src != end)
-		*(cpy++) = *(src++);
-	*cpy = '\0';
-	return (start);
-}
-
-static int			is_sep(char str, char charset)
-{
-	return (str == charset);
-}
-
-static int			final_len(char const *str, char charset,
-								char const *end)
-{
-	int count;
-
-	count = 0;
-	while (*str)
+	index = 0;
+	num_word = 0;
+	while (s[index] && s[index] == c)
+		index++;
+	while (s[index])
 	{
-		while (*str && is_sep(*str, charset))
+		if (s[index] == c)
 		{
-			str++;
-			end = 0;
+			num_word++;
+			while (s[index] && s[index] == c)
+				index++;
+			continue ;
 		}
-		while (*str && !is_sep(*str, charset))
-		{
-			end = str;
-			str++;
-		}
-		if (end)
-			count++;
+		index++;
 	}
-	return (count);
+	if (s[index - 1] != c)
+		num_word++;
+	return (num_word);
 }
 
-static char	const	*real_split(char const **str, char c_set,
-								char const **begin)
+static void				next_word(char **word, unsigned int *word_len, char c)
 {
-	char const *end;
+	unsigned int	index;
 
-	end = 0;
-	while (**str && is_sep(**str, c_set))
+	*word += *word_len;
+	*word_len = 0;
+	index = 0;
+	while (**word && **word == c)
+		(*word)++;
+	while ((*word)[index])
 	{
-		(*str)++;
-		*begin = 0;
-		end = 0;
+		if ((*word)[index] == c)
+			return ;
+		(*word_len)++;
+		index++;
 	}
-	*begin = *str;
-	while (**str && !is_sep(**str, c_set))
-	{
-		end = *str;
-		(*str)++;
-	}
-	return (end);
 }
 
-char				**ft_split(char const *str, char c)
+char					**ft_split(char const *s, char c)
 {
-	int			set_len;
-	int			i;
-	char		**strs;
-	char const	*begin;
-	char const	*end;
+	char			**split;
+	char			*word;
+	unsigned int	word_len;
+	unsigned int	num_word;
+	unsigned int	index;
 
-	if (!str)
-		return (0);
-	end = 0;
-	begin = 0;
-	set_len = final_len(str, c, 0);
-	if (!(strs = (char **)malloc((set_len + 1) * sizeof(char *))))
-		return (0);
-	i = 0;
-	while (*str)
+	if (s == NULL)
+		return (NULL);
+	num_word = count_word(s, c);
+	if (!(split = (char **)malloc(sizeof(char *) * (num_word + 1))))
+		return (NULL);
+	index = 0;
+	word = (char *)s;
+	word_len = 0;
+	while (index < num_word)
 	{
-		end = real_split(&str, c, &begin);
-		if (end)
-			strs[i++] = ft_strdupe(begin, end + 1);
+		next_word(&word, &word_len, c);
+		if (!(split[index] = (char *)malloc(sizeof(char) * (word_len + 1))))
+			return (NULL);
+		ft_strlcpy(split[index], word, word_len + 1);
+		index++;
 	}
-	strs[i] = 0;
-	return (strs);
+	split[index] = NULL;
+	return (split);
 }

@@ -6,7 +6,7 @@
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 10:19:25 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/20 09:41:53 by aduregon         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:50:52 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,6 @@ void		fill_stack(char **arg, t_stack *stack)
 		stack->cont[i][0] = atoi;
 		stack->cont[i][1] = 0;
 		stack->dim++;
-		i++;
-	}
-}
-
-void		print_stack(t_frame frame)
-{
-	int i;
-
-	i = 0;
-	while (i <= frame.a.dim - 1)
-	{
-		if (i < frame.a.dim)
-			printf("[%d] {%d} | ", frame.a.cont[i][0], frame.a.cont[i][1]);
-		else
-			printf("          | ");
-		if (i < frame.b.dim)
-			printf("[%d] {%d} | ", frame.b.cont[i][0], frame.b.cont[i][1]);
-		else
-			printf("            ");
-		puts("");
 		i++;
 	}
 }

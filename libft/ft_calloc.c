@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calloc.c                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:43:07 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:43:10 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:51:25 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 10:51:27 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
+	size_t	index;
 	void	*mem;
 
 	if (!(mem = malloc(count * size)))
-		return (0);
+		return (NULL);
+	index = 0;
 	ft_bzero(mem, count * size);
 	return (mem);
 }

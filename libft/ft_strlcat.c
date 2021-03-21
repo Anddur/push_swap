@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlcat.c                                          :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcossu <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 11:40:36 by mcossu            #+#    #+#             */
-/*   Updated: 2021/01/12 11:40:37 by mcossu           ###   ########.fr       */
+/*   Created: 2021/01/12 10:56:14 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/26 16:18:53 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-size_t	ft_strlcat(char *dst, char const *src, size_t size)
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	char		*dest;
-	char const	*s;
-	size_t		n;
-	size_t		dlen;
+	size_t index;
+	size_t len;
 
-	dest = dst;
-	s = src;
-	n = size;
-	while (n-- && *dest)
-		dest++;
-	dlen = dest - dst;
-	n = size - dlen;
-	if (n == 0)
-		return (size + ft_strlen(s));
-	while (s && *s)
+	len = 0;
+	index = 0;
+	while (dst[len] && len < dstsize)
+		len++;
+	while ((index + len + 1) < dstsize && src[index])
 	{
-		if (n != 1)
-		{
-			*dest++ = *s;
-			n--;
-		}
-		s++;
+		((unsigned char *)dst)[index + len] = ((unsigned char *)src)[index];
+		index++;
 	}
-	*dest = '\0';
-	return (dlen + (s - src));
+	if (len < dstsize)
+		dst[index + len] = '\0';
+	return (len + ft_strlen(src));
 }

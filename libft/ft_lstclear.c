@@ -5,26 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduregon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/13 12:09:08 by aduregon          #+#    #+#             */
-/*   Updated: 2021/03/13 12:09:10 by aduregon         ###   ########.fr       */
+/*   Created: 2021/01/12 11:05:35 by aduregon          #+#    #+#             */
+/*   Updated: 2021/01/12 11:05:36 by aduregon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_lst **lst, void (*del)(void*))
+void		ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_lst *temp;
-	t_lst *iter;
+	t_list *tmp;
 
-	if (!lst)
-		return ;
-	iter = *lst;
-	while (iter)
+	while (*lst != NULL)
 	{
-		temp = iter->next;
-		ft_lstdelone(iter, del);
-		iter = temp;
+		tmp = (*lst)->next;
+		(*del)((*lst)->content);
+		free(*lst);
+		*lst = tmp;
 	}
-	*lst = 0;
 }
